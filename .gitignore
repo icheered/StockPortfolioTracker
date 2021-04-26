@@ -3,6 +3,3 @@ __pycache__/
 .venv/
 test.py
 notes
-test_rethink.py
-test_yfinance.py
-test.py
