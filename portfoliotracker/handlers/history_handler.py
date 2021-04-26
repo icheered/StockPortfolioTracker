@@ -52,7 +52,7 @@ class History_Handler:
         firstdate = ret[0]['FIRSTBUY']        
         datelist = utils.get_date_list(startdate=firstdate)
         
-        holidays = ["2020-11-26", "2020-12-25", "2021-01-01", "2021-01-18", "2021-02-15", "2020-12-28"]
+        holidays = ["2020-11-26", "2020-12-25", "2021-01-01", "2021-01-18", "2021-02-15", "2020-12-28", "2021-04-02","2021-04-05","2021-04-26","2021-04-27"]
         for d in holidays:
             datelist.remove(d)
         self.logger.trace(f"List of dates to patch: {datelist}")
