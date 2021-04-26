@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "stockportfoliotracker"
+version = "0.1.0"
+description = ""
+authors = ["ICheered <tjeerd992@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+rethinkdb = "^2.4.8"
+python-multipart = "^0.0.5"
+fastapi = "^0.63.0"
+uvicorn = "^0.13.4"
+loguru = "^0.5.3"
+pandas = "^1.2.4"
+ConfigArgParse = "^1.4"
+requests = "^2.25.1"
+yfinance = "^0.1.59"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

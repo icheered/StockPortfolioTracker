@@ -1,0 +1,20 @@
+[Configuration File]
+"""
+This file is used to set persistent system parameters.
+Any of these parameters can also be passed as command line arguments.
+
+    $ python main.py --LOG_LEVEL=TRACE
+"""
+
+[General]
+LOG_LEVEL = DEBUG       # Options: Error, Warning, Info, Debug, Trace
+API_ADDRESS = 127.0.0.1
+API_PORT = 4501
+
+[Database]
+DB_ADDRESS = 0.0.0.0
+DB_PORT = 28015
+DB_NAME = stocks
+TRANSACTIONS_TABLE = transactions
+PORTFOLIO_TABLE = portfolio
+STOCKS_TABLE = stockdata
