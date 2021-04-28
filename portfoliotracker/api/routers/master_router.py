@@ -54,6 +54,7 @@ async def upload_transactions(request: Request, csv_file: bytes = File(...)):
     ret = await history_handler.patch_stock_expend()
     ret = await history_handler.patch_currencies()
     ret = await history_handler.patch_stock_price()
+    ret = await history_handler.patch_outliers()
     ret = await history_handler.patch_gain()
 
     

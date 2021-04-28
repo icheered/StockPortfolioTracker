@@ -7,7 +7,6 @@ import requests
 from rethinkdb import RethinkDB
 import yfinance as yf
 
-
 from portfoliotracker.utils import utils
 
 
@@ -36,7 +35,6 @@ class History_Handler:
         return 1
 
 
-
     async def patch_dates(self):
         self.logger.info("Patching Dates...")
         # Check if date is known on which first stock is bought
@@ -51,10 +49,6 @@ class History_Handler:
         
         firstdate = ret[0]['FIRSTBUY']        
         datelist = utils.get_date_list(startdate=firstdate)
-        
-        holidays = ["2020-11-26", "2020-12-25", "2021-01-01", "2021-01-18", "2021-02-15", "2020-12-28", "2021-04-02","2021-04-05","2021-04-26","2021-04-27"]
-        for d in holidays:
-            datelist.remove(d)
         self.logger.trace(f"List of dates to patch: {datelist}")
 
         
@@ -258,6 +252,24 @@ class History_Handler:
                     filter(self.r.row["Date"] == date).\
                     update({"Portfolio": {isin: {"Price": value}}}).\
                     run(self.db_conn))
+        
+    async def fix_outliers(self):
+        # Remove any dates where a stock market is closed (the price for stocks on that market will be 0 resulting in really large negative peaks)
+        outputlist = []
+        ret = list(self.r.\
+            table(self.config['STOCKS_TABLE']).\
+            order_by('Date').\
+            run(self.db_conn))
+        
+        for date in ret:
+            for stock in date['Portfolio']:
+                if date['Portfolio'][stock]["Price"] == 0:
+                    ret_cursor = self.r.\
+                        table(self.config["STOCKS_TABLE"]).\
+                        filter(self.r.row["id"] == date['id']).\
+                        delete().\
+                        run(self.db_conn)
+
 
     async def patch_gain(self):
         """

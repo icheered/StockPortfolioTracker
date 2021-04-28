@@ -3,7 +3,7 @@ from datetime import timedelta, datetime, date
 
 def get_date_list(startdate: str):
     start_dt = datetime.strptime(startdate, '%Y-%m-%d')
-    end_dt = datetime.now()
+    end_dt = (datetime.now() - timedelta(days=1))
 
     def daterange(date1, date2):
         for n in range(int ((date2 - date1).days)+1):

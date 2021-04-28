@@ -69,6 +69,16 @@ async def patch_stock_price(request: Request):
    ret = await history_handler.patch_stock_price()
    return ret
 
+@History_Router.patch("/outliers")
+async def patch_outliers(request: Request):
+   """
+   For each date check if each stock has a non-zero value. If it has a value
+   of 0, remove that date from the database
+   """
+   history_handler = request.app.state.dependencies["history_handler"]
+   ret = await history_handler.fix_outliers()
+   return ret
+
 @History_Router.patch("/gain")
 async def patch_gain(request: Request):
    """
