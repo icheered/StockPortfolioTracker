@@ -253,7 +253,7 @@ class History_Handler:
                     update({"Portfolio": {isin: {"Price": value}}}).\
                     run(self.db_conn))
         
-    async def fix_outliers(self):
+    async def patch_outliers(self):
         # Remove any dates where a stock market is closed (the price for stocks on that market will be 0 resulting in really large negative peaks)
         outputlist = []
         ret = list(self.r.\

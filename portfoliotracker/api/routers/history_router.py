@@ -76,7 +76,7 @@ async def patch_outliers(request: Request):
    of 0, remove that date from the database
    """
    history_handler = request.app.state.dependencies["history_handler"]
-   ret = await history_handler.fix_outliers()
+   ret = await history_handler.patch_outliers()
    return ret
 
 @History_Router.patch("/gain")
