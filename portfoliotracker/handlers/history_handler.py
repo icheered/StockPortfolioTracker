@@ -1,13 +1,12 @@
 """
 Handles getting/adding data to the historic database
 """
-from datetime import timedelta, datetime, date
+from datetime import date, datetime, timedelta
+
 import requests
-
-from rethinkdb import RethinkDB
 import yfinance as yf
-
 from portfoliotracker.utils import utils
+from rethinkdb import RethinkDB
 
 
 class History_Handler:
@@ -54,7 +53,7 @@ class History_Handler:
         
         ret_cursor = self.r.\
             table(self.config["PORTFOLIO_TABLE"]).\
-            filter(self.r.row["STOCKLIST"]).\
+            filterrequest(self.r.row["STOCKLIST"]).\
             run(self.db_conn)
         ret = list(ret_cursor)
         if not ret:
@@ -218,11 +217,14 @@ class History_Handler:
                 if isin in currencies[c]:
                     currency = c
                     break
+
             # Get the symbol for each ISIN
             url = "https://query2.finance.yahoo.com/v1/finance/search"
             params = {'q': isin, 'quotesCount': 1, 'newsCount': 0}
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'} 
 
-            r = requests.get(url, params=params)
+            r = requests.get(url, params=params, headers=headers)
+
             data = r.json()
             symbol = data['quotes'][0]['symbol']
             print(symbol)

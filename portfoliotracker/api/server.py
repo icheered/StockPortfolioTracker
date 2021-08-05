@@ -1,14 +1,12 @@
-import uvicorn
-from portfoliotracker.api.routers.history_router import History_Router
-from portfoliotracker.api.routers.transaction_router import Transaction_Router
-from portfoliotracker.api.routers.portfolio_router import Portfolio_Router
-from portfoliotracker.api.routers.master_router import Master_Router
-
-
-from portfoliotracker.api.uvicorn import UvicornServer
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from portfoliotracker.api.routers.history_router import History_Router
+from portfoliotracker.api.routers.master_router import Master_Router
+from portfoliotracker.api.routers.portfolio_router import Portfolio_Router
+from portfoliotracker.api.routers.transaction_router import Transaction_Router
+from portfoliotracker.api.uvicorn import UvicornServer
+
+import uvicorn
 
 
 class Server:
@@ -19,8 +17,8 @@ class Server:
         app = FastAPI(
             redoc_url=None,
             docs_url="/",
-            title="CryptoBalance",
-            description="CryptoBalance backend API",
+            title="StockBalance",
+            description="StockBalance backend API",
             log_level="trace"
         )
         @app.get("/api/ping")
