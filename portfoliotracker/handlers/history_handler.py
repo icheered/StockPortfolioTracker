@@ -53,7 +53,7 @@ class History_Handler:
         
         ret_cursor = self.r.\
             table(self.config["PORTFOLIO_TABLE"]).\
-            filterrequest(self.r.row["STOCKLIST"]).\
+            filter(self.r.row["STOCKLIST"]).\
             run(self.db_conn)
         ret = list(ret_cursor)
         if not ret:
