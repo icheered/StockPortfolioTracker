@@ -34,7 +34,7 @@ async def upload_transactions(request: Request, csv_file: bytes = File(...)):
             "Waarde": row["Waarde"],
             "WaardeValuta": row[12],
             "Wisselkoers": row["Wisselkoers"],
-            "Transactiekosten": row["Transactiekosten"],
+            "Transactiekosten": row["Transactiekosten en/of"],
             "TransactiekostenValuta": row[15],
             "Totaal": row["Totaal"],
             "TotaalValuta": row[17],

@@ -337,7 +337,7 @@ class History_Handler:
             # }
             entry = {
                 "x": date["Date"],
-                "y": -date["Total"]["Gain"]
+                "y": date["Total"]["Gain"]
             }
             outputlist.append(entry)
         
