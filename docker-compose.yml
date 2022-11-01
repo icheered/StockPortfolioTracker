@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    container_name: 'stocks_rethinkdb'
+    image: rethinkdb
+    ports: 
+      - '8085:8080'
+      - '28015:28015'
+      - '29015:29015'
+    restart: unless-stopped
+  stocks:
+    container_name: 'stocks_app'
+    image: stocks_app
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: 'Dockerfile'
+    network_mode: 'host'
+    ports:
+      - '4501:4501'
+    restart: always
+
