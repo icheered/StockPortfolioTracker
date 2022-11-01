@@ -246,7 +246,10 @@ class History_Handler:
                         run(self.db_conn))
                     if not ret:
                         continue
-                    multiplier = ret[0]["ExchangeRates"][currency]
+                    
+                    multiplier = 1
+                    if currency in ret[0]["ExchangeRates"]:
+                        multiplier = ret[0]["ExchangeRates"][currency]
                     value *= multiplier
                     
                 ret = list(self.r.\
